@@ -1,0 +1,60 @@
+body{
+    background-color: black;
+}
+
+.modalMainContainer{
+    position:absolute;
+    top:0;
+    left:0;
+    background-color: rgba(128, 128, 128, 0.868);
+    width:100%;
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.modalContainer{
+    width:60%;
+    background-color: rgba(15, 14, 14, 0.842);
+    max-height: 90vh;
+    padding :20px;
+    border-radius: 10px;
+    overflow-y:scroll;
+
+}
+
+.modelTitle{
+    text-align: center;
+    color: #fff;
+
+}
+
+.d-inline{
+   display: inline;
+   width:80%;
+   height: 40px;
+   caret-color: black;
+   
+   
+    
+}
+.div-inline{
+    width: 80%;
+    
+}
+
+.deneme1{
+    background-color: black;
+    
+}
+
+#select1{
+    height: 40px;
+    width: 15%;
+}
+
+.form-label{
+    color:#fff
+}
