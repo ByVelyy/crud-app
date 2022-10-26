@@ -11,7 +11,7 @@
     },
     {
       "id": "1666644109808",
-      "studentNumber": "102",
+      "studentNumber": "101",
       "name": "Orhan",
       "surname": "Veli Kanık",
       "class": "4-A",
@@ -20,10 +20,12 @@
     },
     {
       "id": "1666723790465",
-      "studentNumber": "101",
+      "studentNumber": "102",
       "name": "Cemil",
       "surname": "Sonyolcu",
-      "class": "5-C"
+      "class": "5-C",
+      "Name": "Cemil",
+      "Surname": "Sonyolcu"
     },
     {
       "id": "1666723819522",
@@ -52,13 +54,6 @@
       "name": "Erkan",
       "surname": "Sarıyıldız",
       "class": "4-A"
-    },
-    {
-      "id": "1666723977674",
-      "studentNumber": "107",
-      "name": "Barış",
-      "surname": "Solak",
-      "class": "4-C"
     },
     {
       "id": "1666724001858",
