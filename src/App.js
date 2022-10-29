@@ -88,6 +88,8 @@ function App() {
     )
     return true;
   } )}; 
+ 
+ 
   if(searchField==="name") {filteredStudents=students.filter(item => item.name.toLowerCase().includes(searchText.toLowerCase()))}
   if(searchField==="surname"){filteredStudents=students.filter(item => item.surname.toLowerCase().includes(searchText.toLowerCase()))}
   if(searchField==="studentNumber"){filteredStudents=students.filter(item => item.studentNumber.toLowerCase().includes(searchText.toLowerCase()))}
