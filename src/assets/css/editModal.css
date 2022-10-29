@@ -36,6 +36,7 @@ body{
    width:80%;
    height: 40px;
    caret-color: black;
+   background-color: #333;
    
    
     
@@ -52,9 +53,29 @@ body{
 
 #select1{
     height: 40px;
-    width: 15%;
+    width: 120px;
+    background-color: #333;
+    color:#fff;
 }
+
+.select2{
+    height: 35px;
+    width: 75px;
+    background-color:#212529;
+    color:#fff;
+}
+
+.footer{
+    background-color:#212529;
+    color:#fff;  
+    height: 50px;
+}
+
 
 .form-label{
     color:#fff
+}
+
+.btn-add{
+    background-color: rgba(10, 24, 36, 0.582);
 }

@@ -5,7 +5,8 @@ import axios from "axios";
 
 function App() {
   const [searchText,setSearchText]=useState("")
-  const [searchField,setSearchField]=useState("name")
+  const [searchField,setSearchField]=useState("name-surname")
+  const [selectedClass,setSelectedClass]=useState(" Sınıfı")
   const [students, setStudents] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [stdNumber, setStdNumber] = useState("");
@@ -33,7 +34,7 @@ function App() {
       });
   }, [didUpdate]);
 
-  
+   
   const handleAdd = (event) => {
     event.preventDefault()
     if (stdNumber === "" || stdName === "" || stdSurname === "" || stdClass === "") {
@@ -71,8 +72,11 @@ function App() {
   })
 
   const handleSelect=(event)=>{
-    setSearchField(event.target.value)
-    
+    setSearchField(event.target.value)    
+  }
+
+  const handleSelectClass=(event)=>{
+    setSelectedClass(event.target.value)
   }
 
   //erken kaçış
@@ -80,8 +84,24 @@ function App() {
     return <h1>Loading</h1>;
   }
 
+  
+  const uniqueClass=Array.from(new Set(students.map(item => item.class)))
+  uniqueClass.push(" Sınıfı")
+  uniqueClass.sort()
+
+  console.log("Benzersiz",uniqueClass)
+    
+
   var filteredStudents=[]
-  if(searchField==="name-surname") {filteredStudents=students.filter(item => {
+  var selectclassArray=students
+  console.log(selectedClass)
+  
+  if(selectedClass!=" Sınıfı"){
+    selectclassArray=students.filter(item => item.class===selectedClass);
+    console.log("Filteri Hali: " ,selectclassArray)
+  }
+  
+    if(searchField==="name-surname") {filteredStudents=selectclassArray.filter(item => {
     if (
       item.name.toLowerCase().includes(searchText.toLowerCase()) ||
       item.surname.toLowerCase().includes(searchText.toLowerCase())
@@ -90,10 +110,10 @@ function App() {
   } )}; 
  
  
-  if(searchField==="name") {filteredStudents=students.filter(item => item.name.toLowerCase().includes(searchText.toLowerCase()))}
-  if(searchField==="surname"){filteredStudents=students.filter(item => item.surname.toLowerCase().includes(searchText.toLowerCase()))}
-  if(searchField==="studentNumber"){filteredStudents=students.filter(item => item.studentNumber.toLowerCase().includes(searchText.toLowerCase()))}
-  if(searchField==="class"){filteredStudents=students.filter(item => item.class.toLowerCase().includes(searchText.toLowerCase()))}
+  if(searchField==="name") {filteredStudents=selectclassArray.filter(item => item.name.toLowerCase().includes(searchText.toLowerCase()))}
+  if(searchField==="surname"){filteredStudents=selectclassArray.filter(item => item.surname.toLowerCase().includes(searchText.toLowerCase()))}
+  if(searchField==="studentNumber"){filteredStudents=selectclassArray.filter(item => item.studentNumber.toLowerCase().includes(searchText.toLowerCase()))}
+  if(searchField==="class"){filteredStudents=selectclassArray.filter(item => item.class.toLowerCase().includes(searchText.toLowerCase()))}
 
   return (
     <div>
@@ -102,7 +122,7 @@ function App() {
           <a className="navbar-brand" href="#">
             CRUD APP
           </a>
-          <h2 className="navbar-brand navbar-dark">REACT İLKÖĞRETİM OKULU ÖĞRENCİ BİLGİ SİSTEMİ</h2>
+          <h2 className="navbar-brand navbar-dark">ByVely İlköğretim Okulu Öğrenci Bilgi Sistemi</h2>
         </div>
       </nav>
       <div className="container my-2">
@@ -111,8 +131,8 @@ function App() {
            
           <select className="form-select"  id="select1" onChange={handleSelect}>
             <option value="studentNumber">Öğrenci No</option>
-            <option value="name-surname">Adı Soyadı</option>
-            <option selected value="name">Adı</option>
+            <option selected value="name-surname">Adı Soyadı</option>
+            <option value="name">Adı</option>
             <option value="surname">Soyadı</option>
             <option value="class">Sınıfı</option>
           </select>
@@ -124,7 +144,7 @@ function App() {
            />
           </div>
           <button
-            className="btn btn-primary"
+            className="btn btn-primary btn-add"
             onClick={() => {
               setShowAddForm(!showAddForm);
               setStdNumber("");
@@ -202,7 +222,19 @@ function App() {
               <th scope="col">Öğrenci No</th>
               <th scope="col">Adı</th>
               <th scope="col">Soyadı</th>
-              <th scope="col">Sınıfı</th>
+              <th scope="col">
+              <select className="select2" value={selectedClass}   onChange={handleSelectClass}>
+              {
+              uniqueClass.map(item => {
+                  return (<option key={item.id} value={item}>
+                          {item}
+                      </option>
+                  )
+              })
+              }
+             </select>
+              
+              </th>
               <th> İşlem </th>
             </tr>
           </thead>
@@ -229,6 +261,7 @@ function App() {
       {
         showEditModal && (<EditStudentModal didUpdate={didUpdate} setDidUpdate={setDidUpdate} students={students} selectedStudent={selectedStudent} setShowEditModal={setShowEditModal}/>)
       }
+      
     </div>
   );
 }
